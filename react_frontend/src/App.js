@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import MainPage from "./component/page/MainPage";
-
+import PostViewPage from "./component/page/PostViewPage";
+import PostWritePage from "./component/page/PostWritePage";
 const MainTitleText = styled.p`
   font-size: 24px;
   font-weight: bold;
@@ -16,6 +17,8 @@ function App(props) {
       <MainTitleText>BLOG</MainTitleText>
       <Routes>
         <Route index element={<MainPage />} />
+        <Route path="post/:postId" element={<PostViewPage />} />
+        <Route path="post-write" element={<PostWritePage />} />
       </Routes>
     </BrowserRouter>
   );
