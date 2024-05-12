@@ -20,17 +20,21 @@ function PostList(props) {
 
   return (
     <Wrapper>
-      {posts.map((post, index) => {
-        return (
-          <PostListItem
-            key={post.id}
-            post={post}
-            onClick={() => {
-              onClickItem(post);
-            }}
-          />
-        );
-      })}
+      {posts.length > 0 ? (
+        posts.map((post, index) => {
+          return (
+            <PostListItem
+              key={post.id}
+              post={post}
+              onClick={() => {
+                onClickItem(post);
+              }}
+            />
+          );
+        })
+      ) : (
+        <h2>There is no post to show</h2>
+      )}
     </Wrapper>
   );
 }

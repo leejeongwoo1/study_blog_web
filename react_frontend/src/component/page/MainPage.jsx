@@ -26,14 +26,9 @@ const Container = styled.div`
 `;
 
 function MainPage(props) {
-  const {} = props;
-  const [posts, setPosts] = useState("");
+  const { postList } = props;
+  //const [posts, setPosts] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    fetch("/post")
-      .then((response) => response.json())
-      .then((data) => setPosts(data));
-  });
 
   return (
     <Wrapper>
@@ -45,7 +40,7 @@ function MainPage(props) {
           }}
         />
         <PostList
-          posts={posts}
+          posts={postList}
           onClickItem={(item) => {
             navigate(`/post/${item.id}`);
           }}

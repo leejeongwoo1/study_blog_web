@@ -22,7 +22,14 @@ router.get("/", async (req, res) => {
     res.status(400).json({ status: "fail", error });
   }
 });
-
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findOne({ where: { id: req.params.id } });
+    res.status(200).json({ status: "ok", data: post });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error });
+  }
+});
 router.put("/:id", async (req, res) => {
   try {
     const post = await Post.update(

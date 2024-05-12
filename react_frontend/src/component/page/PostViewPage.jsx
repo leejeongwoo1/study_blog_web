@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
 import data from "../../data.json";
-
+import axios from "axios";
 const Wrapper = styled.div`
   padding: 16px;
   width: calc() (100%-32px);
@@ -45,11 +45,17 @@ const ContentText = styled.p`
 function PostViewPage(props) {
   const navigate = useNavigate();
   const { postId } = useParams();
-
-  const post = data.find((item) => {
-    return item.id == postId;
-  });
-
+  const [post, setPost] = useState([]);
+  // const post = data.find((item) => {
+  //   return item.id == postId;
+  // });
+  const getPost = async () => {
+    const response = await axios.get(`/post/${postId}`);
+    setPost(response.data.data);
+  };
+  useEffect(() => {
+    getPost();
+  }, []);
   return (
     <Wrapper>
       <Container>
@@ -60,7 +66,7 @@ function PostViewPage(props) {
           }}
         />
         <PostContainer>
-          <TitleText>{post.title}</TitleText>
+          <TitleText>{post.userId}</TitleText>
           <ContentText>{post.content}</ContentText>
         </PostContainer>
       </Container>

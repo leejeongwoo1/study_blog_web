@@ -26,7 +26,7 @@ function PostListItem(props) {
   const { post, onClick } = props;
   return (
     <Wrapper onClick={onClick}>
-      <TitleText>{post.title}</TitleText>
+      <TitleText>{post.userId}</TitleText>
     </Wrapper>
   );
 }
