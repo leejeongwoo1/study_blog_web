@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const { sequelize } = require("./models");
 
 dotenv.config();
-const pageRouter = require("./routes/page");
+const postRouter = require("./routes/post");
 
 const app = express();
 app.set("port", process.env.PORT || 8001);
@@ -38,7 +38,7 @@ app.use(
   })
 );
 
-app.use("/", pageRouter);
+app.use("/post", postRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
@@ -50,7 +50,6 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
   res.status(err.status || 500);
-  res.render("error");
 });
 
 app.listen(app.get("port"), () => {

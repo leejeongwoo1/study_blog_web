@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import PostList from "../list/PostList";
@@ -27,8 +27,13 @@ const Container = styled.div`
 
 function MainPage(props) {
   const {} = props;
-
+  const [posts, setPosts] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    fetch("/post")
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  });
 
   return (
     <Wrapper>
@@ -40,7 +45,7 @@ function MainPage(props) {
           }}
         />
         <PostList
-          posts={data}
+          posts={posts}
           onClickItem={(item) => {
             navigate(`/post/${item.id}`);
           }}

@@ -8,13 +8,13 @@ module.exports = class Post extends Sequelize.Model {
           type: Sequelize.TEXT,
           allowNull: false,
         },
-        img: {
-          type: Sequelize.STRING(200),
-          allowNull: true,
+        userId: {
+          type: Sequelize.STRING(30),
+          allowNull: false,
         },
       },
       {
-        sequelize: true,
+        sequelize,
         underscored: false,
         modelName: "Post",
         tableName: "posts",
@@ -24,7 +24,5 @@ module.exports = class Post extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {
-    db.Post.belongsTo(db.User);
-  }
+  static associate(db) {}
 };
