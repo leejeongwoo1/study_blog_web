@@ -12,21 +12,11 @@ const MainTitleText = styled.p`
 `;
 
 function App(props) {
-  const [postList, setPostList] = useState([]);
-  const getPosts = async () => {
-    const response = await axios.get("/post");
-
-    setPostList(response.data.data);
-  };
-  useEffect(() => {
-    getPosts();
-  }, []);
-
   return (
     <BrowserRouter>
       <MainTitleText>BLOG</MainTitleText>
       <Routes>
-        <Route index element={<MainPage postList={postList} />} />
+        <Route index element={<MainPage />} />
         <Route path="post/:postId" element={<PostViewPage />} />
         <Route path="post-write" element={<PostWritePage />} />
       </Routes>

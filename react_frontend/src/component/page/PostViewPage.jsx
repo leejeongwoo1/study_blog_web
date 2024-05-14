@@ -46,9 +46,7 @@ function PostViewPage(props) {
   const navigate = useNavigate();
   const { postId } = useParams();
   const [post, setPost] = useState([]);
-  // const post = data.find((item) => {
-  //   return item.id == postId;
-  // });
+
   const getPost = async () => {
     const response = await axios.get(`/post/${postId}`);
     setPost(response.data.data);
@@ -66,7 +64,7 @@ function PostViewPage(props) {
           }}
         />
         <PostContainer>
-          <TitleText>{post.userId}</TitleText>
+          <TitleText>{post.title}</TitleText>
           <ContentText>{post.content}</ContentText>
         </PostContainer>
       </Container>

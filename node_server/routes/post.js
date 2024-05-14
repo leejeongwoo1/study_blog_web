@@ -6,7 +6,7 @@ router.post("/", async (req, res) => {
   try {
     const post = await Post.create({
       content: req.body.content,
-      userId: req.body.userId,
+      title: req.body.title,
     });
     res.status(200).json({ status: "ok", data: post });
   } catch (error) {
@@ -35,7 +35,7 @@ router.put("/:id", async (req, res) => {
     const post = await Post.update(
       {
         content: req.body.content,
-        userId: req.body.userId,
+        title: req.body.title,
       },
       {
         where: { id: req.params.id },

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import PostList from "../list/PostList";
 import Button from "../ui/Button";
-import data from "../../data.json";
+import axios from "axios";
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -26,10 +26,15 @@ const Container = styled.div`
 `;
 
 function MainPage(props) {
-  const { postList } = props;
-  //const [posts, setPosts] = useState("");
   const navigate = useNavigate();
-
+  const [postList, setPostList] = useState([]);
+  const getPosts = async () => {
+    const response = await axios.get("/post");
+    setPostList(response.data.data);
+  };
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <Wrapper>
       <Container>

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TextInput from "../ui/TextInput";
 import Button from "../ui/Button";
+import axios from "axios";
+//import { use } from "../../../../node_server/routes/post";
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -29,7 +31,21 @@ function PostWritePage(props) {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
+  const addpost = async () => {
+    try {
+      const response = await axios.post("/post", {
+        title: title,
+        content: content,
+      });
+      if (response.status === 200) {
+        console.log("성공");
+        navigate("/");
+        throw new Error("task can not be added");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
     <Wrapper>
       <Container>
@@ -50,7 +66,7 @@ function PostWritePage(props) {
         <Button
           title="글 작성하기"
           onClick={() => {
-            navigate("/");
+            addpost();
           }}
         />
       </Container>
