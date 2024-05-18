@@ -15,6 +15,7 @@ module.exports = class Post extends Sequelize.Model {
       },
       {
         sequelize,
+        timestamps: true,
         underscored: false,
         modelName: "Post",
         tableName: "posts",
@@ -24,5 +25,7 @@ module.exports = class Post extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Post.belongsTo(db.User);
+  }
 };
